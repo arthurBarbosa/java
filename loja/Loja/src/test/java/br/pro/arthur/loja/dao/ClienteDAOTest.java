@@ -1,4 +1,4 @@
-package br.pro.delfino.drogaria.dao;
+package br.pro.arthur.loja.dao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

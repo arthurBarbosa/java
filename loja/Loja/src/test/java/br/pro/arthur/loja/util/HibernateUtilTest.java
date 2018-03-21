@@ -1,4 +1,4 @@
-package br.pro.delfino.drogaria.util;
+package br.pro.arthur.loja.util;
 
 import org.hibernate.Session;
 import org.junit.Ignore;

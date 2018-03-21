@@ -1,4 +1,4 @@
-package br.pro.delfino.drogaria.dao;
+package br.pro.arthur.loja.dao;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
