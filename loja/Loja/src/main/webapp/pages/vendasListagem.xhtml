@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewAction action="#{vendaBean.listar}"/>
+		</f:metadata>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+	<h:form id="formListagem">
+		<p:panel header="Vendas - Listagem">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{vendaBean.vendas}" var="objeto" rows="5">
+
+				<p:column style="width:16px;">
+				<p:rowToggler/>
+				</p:column>
+
+				<p:column headerText="Horário" filterBy="#{objeto.horario}"
+					sortBy="#{objeto.horario}">
+					<h:outputText value="#{objeto.horario}" >
+					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Preço Total" filterBy="#{objeto.estado.nome}"
+					sortBy="#{objeto.precoTotal}">
+					<h:outputText value="#{objeto.precoTotal}" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Cliente" filterBy="#{objeto.cliente.pessoa.nome}"
+					sortBy="#{objeto.cliente.pessoa.nome}">
+					<h:outputText value="#{objeto.cliente.pessoa.nome}" />
+				</p:column>
+				
+				<p:column headerText="Funcionário" filterBy="#{objeto.funcionario.pessoa.nome}"
+					sortBy="#{objeto.funcionario.pessoa.nome}">
+					<h:outputText value="#{objeto.funcionario.pessoa.nome}" />
+				</p:column>
+				
+				<p:rowExpansion>
+					<p:dataTable emptyMessage="Nenhum registro encontrado." value="#{objeto.itensDaVenda}" var="itemVenda">
+						<p:column headerText="Produto">
+							<h:outputText value="#{itemVenda.produto.descricao}"/>
+						</p:column>
+						
+						<p:column headerText="Qtde">
+							<h:outputText value="#{itemVenda.quantidade}"/>
+						</p:column>
+						
+						<p:column headerText="Preço">
+							<h:outputText value="#{itemVenda.precoParcial}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</p:rowExpansion>
+				
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+
+	</ui:define>
+</ui:composition>

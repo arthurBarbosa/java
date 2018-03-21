@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="produtos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="880c24e2-33b5-43e8-b53d-a687d735218b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Loja Data Adapter "/>
+	<parameter name="PRODUTO_DESCRICAO" class="java.lang.String"/>
+	<parameter name="FABRICANTE_DESCRICAO" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT drogaria.produto.descricao AS pdescricao,
+	drogaria.produto.preco,
+	drogaria.produto.quantidade,
+	drogaria.fabricante.descricao AS fdescricao
+FROM drogaria.produto
+	INNER JOIN drogaria.fabricante ON 
+	 drogaria.produto.fabricante_codigo = drogaria.fabricante.codigo 
+WHERE 
+	 drogaria.produto.descricao LIKE $P{PRODUTO_DESCRICAO} 
+	 AND drogaria.fabricante.descricao LIKE $P{FABRICANTE_DESCRICAO} 
+ORDER BY drogaria.produto.descricao ASC,
+	drogaria.fabricante.descricao ASC]]>
+	</queryString>
+	<field name="pdescricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pdescricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="produto"/>
+	</field>
+	<field name="preco" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="preco"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="produto"/>
+	</field>
+	<field name="quantidade" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="quantidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="produto"/>
+	</field>
+	<field name="fdescricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fdescricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fabricante"/>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image hAlign="Center">
+				<reportElement x="0" y="0" width="550" height="75" uuid="c6cb3113-3a5e-410d-a898-3a4d39e98089"/>
+				<imageExpression><![CDATA["src/main/webapp/resources/images/Abm-web.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="2" width="370" height="30" uuid="90380478-e8e0-4be2-8a80-1c4044c87c5a"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Relatórios de Produtos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="366d14a4-7a6a-407e-81d1-464facd57045">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6bf9d11-2b72-4941-a9e4-c2e43bf3a20e"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="0" width="100" height="30" uuid="bedf504b-c5d5-4328-b097-f7ed5278f13d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fc0d3de-8e89-419b-bc97-a3d147838af2"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREÇO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="0" width="100" height="30" uuid="132e309a-7528-4440-b23d-7290d89a7eea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="247d981e-6bd1-4f63-b65f-01fe5bf62f4a"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="0" width="100" height="30" uuid="6c875253-4c39-451b-98d4-7df5639322a9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fc90c0b-349f-448a-a53c-9818550913c7"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FABRICANTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="90afcb97-d11d-4e7c-a1bb-f1abeb7f9776">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6bf9d11-2b72-4941-a9e4-c2e43bf3a20e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{pdescricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="0.00">
+				<reportElement x="182" y="0" width="100" height="30" uuid="9d5faddb-4bc8-4b48-89d5-b147b5aeb925">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fc0d3de-8e89-419b-bc97-a3d147838af2"/>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="0" width="100" height="30" uuid="b0a80eac-d06a-4cfa-88aa-bfcea8bdaa67">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="247d981e-6bd1-4f63-b65f-01fe5bf62f4a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="0" width="100" height="30" uuid="e28d0c1e-a932-4959-9c55-579414032884">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fc90c0b-349f-448a-a53c-9818550913c7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fdescricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="550" height="30" uuid="6494153c-e688-4ccb-b12c-cc7fc1e123be"/>
+				<box>
+					<topPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rua: Prof: Lila Borges de Sá, 525, Monte das Oliveiras, CEP 69093-755, Manaus - AM]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
