@@ -15,10 +15,10 @@
 
 
 
-	<!-- Definição do PhaseListener da Autenticação -->
+	<!-- Definição do PhaseListener da Autenticação 
 	<lifecycle>
 		<phase-listener>br.pro.arthur.loja.util.AutenticacaoListener</phase-listener>
-	</lifecycle>
+	</lifecycle>-->
 
 
 
